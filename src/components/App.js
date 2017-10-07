@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ContributorsList from "./ContributorsList";
+import FilterContributors from "./FilterContributors";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { fetchReduxContributors } from "../actions";
@@ -15,7 +16,13 @@ class App extends Component {
   }
 
   render() {
-    return <ContributorsList />;
+    return (
+      <div className="app">
+        <h3>Redux Contributors</h3>
+        <FilterContributors />
+        <ContributorsList />
+      </div>
+    );
   }
 }
 

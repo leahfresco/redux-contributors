@@ -3,25 +3,31 @@ import { connect } from "react-redux";
 import { fetchReduxContributors } from "../actions";
 
 class ContributorsList extends Component {
-  renderContributors(contributor) {
-    return (
-      <li key={contributor.id} className="media text-center">
-        <img
-          src={contributor.avatar_url}
-          className="d-flex align-self-center mr-3 contributor-avatar"
-        />
-        <div className="media-object">
-          <p className="mt-2 mb-1">{contributor.login}</p>
-        </div>
-      </li>
-    );
+  constructor(props) {
+    super(props);
+
+    this.renderContributors = this.renderContributors.bind(this);
+  }
+
+  renderContributors({ login, avatar_url }) {
+    if (login.startsWith(this.props.filter)) {
+      return (
+        <li key={login} className="media text-center">
+          <img
+            src={avatar_url}
+            className="d-flex align-self-center mr-3 contributor-avatar"
+          />
+          <div className="media-object">
+            <p className="mt-2 mb-1">{login}</p>
+          </div>
+        </li>
+      );
+    }
   }
 
   render() {
-    console.log(this.props.contributors);
     return (
       <div className="text-center">
-        <h3>Redux Contributors</h3>
         <ul className="list-unstyled">
           {this.props.contributors.map(this.renderContributors)}
         </ul>
@@ -30,8 +36,8 @@ class ContributorsList extends Component {
   }
 }
 
-function mapStateToProps({ contributors }) {
-  return { contributors };
+function mapStateToProps({ contributors, filter }) {
+  return { contributors, filter };
 }
 
 export default connect(mapStateToProps)(ContributorsList);
