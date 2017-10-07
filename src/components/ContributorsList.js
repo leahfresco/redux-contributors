@@ -1,13 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { fetchReduxContributors } from "../actions";
 
 class ContributorsList extends Component {
-  componentWillMount() {
-    this.props.fetchReduxContributors();
-  }
-
   renderContributors(contributor) {
     return (
       <li key={contributor.id} className="media text-center">
@@ -35,12 +30,8 @@ class ContributorsList extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchReduxContributors }, dispatch);
-}
-
 function mapStateToProps({ contributors }) {
   return { contributors };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ContributorsList);
+export default connect(mapStateToProps)(ContributorsList);
