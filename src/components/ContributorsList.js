@@ -12,13 +12,23 @@ class ContributorsList extends Component {
   renderContributors({ login, avatar_url }) {
     if (login.startsWith(this.props.filter)) {
       return (
-        <li key={login} className="media text-center">
+        <li key={login} className="media text-center contributor-media">
           <img
             src={avatar_url}
             className="d-flex align-self-center mr-3 contributor-avatar"
           />
           <div className="media-object">
-            <p className="mt-2 mb-1">{login}</p>
+            <p className="mt-3 mb-1 contributor-detail">
+              {login}
+              <i
+                className="text-right fa fa-2x fa-thumbs-up contributor-detail"
+                aria-hidden="true"
+              />
+              <i
+                className="text-right fa fa-2x fa-thumbs-down contributor-detail"
+                aria-hidden="true"
+              />
+            </p>
           </div>
         </li>
       );
@@ -27,7 +37,7 @@ class ContributorsList extends Component {
 
   render() {
     return (
-      <div className="text-center">
+      <div className="contributors-list">
         <ul className="list-unstyled">
           {this.props.contributors.map(this.renderContributors)}
         </ul>

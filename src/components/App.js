@@ -18,7 +18,7 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <h3>Redux Contributors</h3>
+        <h3 className="text-center">Redux Contributors</h3>
         <FilterContributors />
         <ContributorsList />
       </div>

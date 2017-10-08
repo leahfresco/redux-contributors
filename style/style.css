@@ -1,3 +1,11 @@
 .contributor-avatar {
   height: 64px;
 }
+
+.contributor-media {
+  margin: 5px;
+}
+
+.contributor-detail {
+  margin-left: 20px;
+}
