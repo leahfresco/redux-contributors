@@ -32,7 +32,7 @@ class ContributorsList extends Component {
                 aria-hidden="true"
                 onClick={() => this.props.downvoteContributor(login)}
               />
-              Votes: {votes}
+              &emsp; Votes: {votes}
             </p>
           </div>
         </li>
