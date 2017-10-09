@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchReduxContributors } from "../actions";
+import { upvoteContributor } from "../actions/index";
+import { bindActionCreators } from "redux";
 
 class ContributorsList extends Component {
   constructor(props) {
@@ -9,7 +11,7 @@ class ContributorsList extends Component {
     this.renderContributors = this.renderContributors.bind(this);
   }
 
-  renderContributors({ login, avatar_url }) {
+  renderContributors({ login, avatar_url, votes }) {
     if (login.startsWith(this.props.filter)) {
       return (
         <li key={login} className="media text-center contributor-media">
@@ -20,14 +22,16 @@ class ContributorsList extends Component {
           <div className="media-object">
             <p className="mt-3 mb-1 contributor-detail">
               {login}
-              <i
+              <a
                 className="text-right fa fa-2x fa-thumbs-up contributor-detail"
                 aria-hidden="true"
+                onClick={() => this.props.upvoteContributor(login)}
               />
-              <i
+              <a
                 className="text-right fa fa-2x fa-thumbs-down contributor-detail"
                 aria-hidden="true"
               />
+              Votes: {votes}
             </p>
           </div>
         </li>
@@ -50,4 +54,8 @@ function mapStateToProps({ contributors, filter }) {
   return { contributors, filter };
 }
 
-export default connect(mapStateToProps)(ContributorsList);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ upvoteContributor }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContributorsList);
