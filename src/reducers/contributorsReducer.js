@@ -1,4 +1,8 @@
-import { FETCH_CONTRIBUTORS, UPVOTE_CONTRIBUTOR } from "../actions/index";
+import {
+  FETCH_CONTRIBUTORS,
+  UPVOTE_CONTRIBUTOR,
+  DOWNVOTE_CONTRIBUTOR
+} from "../actions/index";
 
 import { Map, toJS } from "immutable";
 
@@ -15,11 +19,19 @@ export default function(state = [], action) {
       );
       return state.concat(new_contributors);
     case UPVOTE_CONTRIBUTOR:
-      console.log(state);
       return state.map(contributor => {
         if (contributor.login == action.login) {
           return Object.assign({}, contributor, {
             votes: contributor.votes + 1
+          });
+        }
+        return contributor;
+      });
+    case DOWNVOTE_CONTRIBUTOR:
+      return state.map(contributor => {
+        if (contributor.login == action.login) {
+          return Object.assign({}, contributor, {
+            votes: contributor.votes - 1
           });
         }
         return contributor;

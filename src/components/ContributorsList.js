@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchReduxContributors } from "../actions";
-import { upvoteContributor } from "../actions/index";
+import { upvoteContributor, downvoteContributor } from "../actions/index";
 import { bindActionCreators } from "redux";
 
 class ContributorsList extends Component {
@@ -30,6 +30,7 @@ class ContributorsList extends Component {
               <a
                 className="text-right fa fa-2x fa-thumbs-down contributor-detail"
                 aria-hidden="true"
+                onClick={() => this.props.downvoteContributor(login)}
               />
               Votes: {votes}
             </p>
@@ -55,7 +56,10 @@ function mapStateToProps({ contributors, filter }) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ upvoteContributor }, dispatch);
+  return bindActionCreators(
+    { upvoteContributor, downvoteContributor },
+    dispatch
+  );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContributorsList);

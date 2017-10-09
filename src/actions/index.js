@@ -28,3 +28,10 @@ export const upvoteContributor = login => {
     login
   };
 };
+
+export const downvoteContributor = login => {
+  return {
+    type: DOWNVOTE_CONTRIBUTOR,
+    login
+  };
+};
