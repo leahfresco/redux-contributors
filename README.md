@@ -6,6 +6,8 @@ Has a search text field at the top to filter these contributors by name. For exa
 
 Allows users to upvote/downvote each contributor and show vote totals for each contributor.
 
+[Click here to go to the deployed application!](https://earnup-redux.herokuapp.com/)
+
 ## Installation
 
 To run locally:
